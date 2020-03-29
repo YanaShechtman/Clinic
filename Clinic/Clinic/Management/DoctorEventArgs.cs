@@ -1,4 +1,5 @@
 ﻿using System;
+using Clinic.Models;
 
 namespace Clinic.Management
 {

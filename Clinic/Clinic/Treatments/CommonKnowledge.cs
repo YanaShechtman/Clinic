@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clinic.Treatments
+namespace Medications
 {
     public static class CommonKnowledge
     {
-        public static Dictionary<uint, List<ITreatment>> IllnessToTreatment { set; get; }
+        public static Dictionary<uint, List<IMedication>> IllnessToTreatment { set; get; }
 
-        public static List<ITreatment> GetTreatmentsByIllnessId(uint illnessID)
+        public static List<IMedication> GetTreatmentsByIllnessId(uint illnessID)
         {
-            List<ITreatment> treatmentsByIllnessId;
+            List<IMedication> treatmentsByIllnessId;
             if (IllnessToTreatment.TryGetValue(illnessID, out treatmentsByIllnessId))
             {
                 return treatmentsByIllnessId;
@@ -23,9 +23,9 @@ namespace Clinic.Treatments
             }
         }
 
-        public static bool AddTreatmentToIllness(uint illnessId, List<ITreatment> treatments)
+        public static bool AddTreatmentToIllness(uint illnessId, List<IMedication> treatments)
         {
-            List<ITreatment> treatmentsByIllnessId;
+            List<IMedication> treatmentsByIllnessId;
             if (IllnessToTreatment.TryGetValue(illnessId, out treatmentsByIllnessId))
             {
                 treatmentsByIllnessId.AddRange(treatments);
@@ -45,7 +45,7 @@ namespace Clinic.Treatments
             }
             else
             {
-                IllnessToTreatment.Add(illnessId, new List<ITreatment>());
+                IllnessToTreatment.Add(illnessId, new List<IMedication>());
                 return true;
             }
         }

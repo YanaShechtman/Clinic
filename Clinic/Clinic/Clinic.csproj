@@ -68,7 +68,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scheduling\Scheduler.cs" />
     <Compile Include="Models\Enums\Sex.cs" />
-    <Compile Include="Treatments\ITreatment.cs" />
+    <Compile Include="Treatments\IMedication.cs" />
+    <Compile Include="Treatments\Prescription.cs" />
     <Compile Include="Treatments\Range.cs" />
     <Compile Include="Treatments\TreatmentFrequency.cs" />
     <Compile Include="Models\Visit.cs" />

@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace Clinic.Enums
+﻿namespace Clinic.Models.Enums
 {
    public enum Sex
     {

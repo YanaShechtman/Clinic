@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Clinic.Enums;
-using Clinic.Sceduling;
-using Clinic.Treatments;
+using Clinic.Models;
+using Clinic.Models.Enums;
+using Clinic.Scheduling;
+using Medications;
 
 namespace Clinic.Management
 {
@@ -54,5 +55,16 @@ namespace Clinic.Management
         {
             return _scheduler.CreateVisit(doctorId,patient,illnesses);
         }
+
+        public void CancelVisit(uint visitId)
+        {
+            _scheduler.CancelVisit(visitId);
+        }
+
+        public List<Medication> GivePatientPrescription(Prescription prescription)
+        {
+            return _pharmacy.GiveMedications(prescription);
+        }
+
    }
 }

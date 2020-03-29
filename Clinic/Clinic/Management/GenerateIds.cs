@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Clinic
+﻿namespace Clinic.Management
 {
     public static class GenerateIds
     {
@@ -13,6 +7,7 @@ namespace Clinic
         private static uint _visitId = 0;
         private static uint _medicationId = 0;
         private static uint _illnessId = 0;
+        private static uint _prescriptionId = 0;
 
         public static uint GetNextPatientId()
         {
@@ -33,6 +28,10 @@ namespace Clinic
         public static uint GetNextVisitId()
         {
             return _visitId++;
+        }
+        public static uint GetNextPrescriptionId()
+        {
+            return _prescriptionId++;
         }
     }
 }

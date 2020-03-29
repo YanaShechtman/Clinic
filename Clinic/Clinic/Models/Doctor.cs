@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Clinic.Enums;
-using Clinic.Treatments;
-namespace Clinic
+using Clinic.Models.Enums;
+using Medications;
+
+namespace Clinic.Models
 {
     public class Doctor : Person
     {
@@ -16,15 +15,18 @@ namespace Clinic
         {
         }
 
-        public List<ITreatment> GiveTreatment(Patient patient, IList<Illness> illnesses)
+        public Prescription GiveTreatment(Patient patient, IList<Illness> illnesses)
         {
-            var treatments = new List<ITreatment>();
+            var treatments = new List<IMedication>();
             foreach (var illness in illnesses)
             {
                 var treatmentsInGeneral = CommonKnowledge.GetTreatmentsByIllnessId(illness.Id);
                 treatments.AddRange(treatmentsInGeneral);
             }
-            return treatments.Where(treatment => treatment.IsRelevant(patient)).ToList();
+            var medicationsToGive = treatments.Where(treatment => treatment.IsRelevant(patient)).ToList();
+            var medications = medicationsToGive.ToDictionary<IMedication, IMedication, uint>
+                (medication => medication, medication => 1);
+            return new Prescription(patient.Id,Id,medications);
         }
     }
 }

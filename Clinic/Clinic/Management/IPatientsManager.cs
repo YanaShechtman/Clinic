@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Clinic.Models;
 
 namespace Clinic.Management
 {

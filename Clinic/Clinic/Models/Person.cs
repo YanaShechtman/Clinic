@@ -1,7 +1,7 @@
 ﻿using System;
-using Clinic.Enums;
+using Clinic.Models.Enums;
 
-namespace Clinic
+namespace Clinic.Models
 {
     public abstract class Person
     {

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
-using Clinic.Sceduling;
+using System.Linq;
+using Clinic.Models;
 
-namespace Clinic
+namespace Clinic.Scheduling
 {
     public class Scheduler : IScheduler
     {
@@ -17,9 +15,10 @@ namespace Clinic
         public Dictionary<uint, List<Visit>> Visits { get; set; }
         public List<Doctor> Doctors { get; set; }
         private readonly int _visitDuration;
-        public void CancelVisit()
+
+        public void CancelVisit(uint visitId)
         {
-            throw new NotImplementedException();
+            Visits.Remove(visitId);
         }
 
         public Visit CreateVisit(uint doctorId, Patient patient, IList<Illness> illnesses)
@@ -40,12 +39,6 @@ namespace Clinic
             }
             else return null;
         }
-
-        public void EditVisit()
-        {
-            throw new NotImplementedException();
-        }
-        
         public void OnDoctorAdded(Doctor doctor)
         {
             Visits.Add(doctor.Id, new List<Visit>());

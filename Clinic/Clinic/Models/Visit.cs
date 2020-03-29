@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Clinic.Treatments;
+using Clinic.Management;
+using Medications;
 
-namespace Clinic
+namespace Clinic.Models
 {
    public class Visit
     {
@@ -17,7 +15,6 @@ namespace Clinic
             StartTime = startTime;
             EndTime = endTime;
             Illnesses = illnesses;
-            Treatments = new List<ITreatment>();
             Finished = false;
         }
         public uint Id { get; set; }
@@ -27,11 +24,13 @@ namespace Clinic
         public DateTime EndTime { get; set; }
         public bool Finished { get; set; }
         public IList<Illness> Illnesses { get; set; }
-        public  IList<ITreatment> Treatments { get; set; }
+
         public void ExecuteVisit()
         {
-           Treatments = Doctor.GiveTreatment(Patient, Illnesses);
-           Finished = true;
+            var prescription = Doctor.GiveTreatment(Patient, Illnesses);
+            prescription.VisitId = Id;
+            Patient.Prescriptions.Add(prescription);
+            Finished = true;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clinic.Treatments
+namespace Medications
 {
    public enum  Range
     {

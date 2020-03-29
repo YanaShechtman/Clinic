@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Clinic.Enums;
+using Clinic.Models;
 
-namespace Clinic.Treatments
+namespace Medications
 {
-   public interface ITreatment
+   public interface IMedication
     {
+        uint Id { get; set; }
         string Name { get; set; }
         TreatmentFrequency Frequency { get; set; }
         string Comment { get; set; }
         bool IsRelevant(Patient patient);
+
     }
 }

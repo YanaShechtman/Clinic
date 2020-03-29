@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO.Pipes;
 using System.Linq;
-using Clinic.Enums;
+using Clinic.Management;
+using Clinic.Models;
+using Clinic.Models.Enums;
 
-namespace Clinic.Treatments
+namespace Medications
 {
-    public class Medication : ITreatment
+    public class Medication : IMedication
     {
         public string Name { get; set; }
         public uint Id { get; }
@@ -35,6 +37,5 @@ namespace Clinic.Treatments
                 return false;
             return true;
         }
-
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Clinic.Treatments
+namespace Medications
 {
     public interface IPharmacy
     {
@@ -11,7 +11,7 @@ namespace Clinic.Treatments
         bool EditMedication(uint medicationId, Medication newMedication);
         bool EditMedicationStock(uint medicationId, uint unitsInStock);
         uint CheckUnitsInStock(uint medicationId);
-        List<Medication> GiveMedication(uint medicationId, uint units);
+        List<Medication> GiveMedications(Prescription prescription);
 
     }
 }

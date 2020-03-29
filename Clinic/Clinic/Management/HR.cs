@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Clinic.Enums;
+using Clinic.Models;
+using Clinic.Models.Enums;
 
 namespace Clinic.Management
 {

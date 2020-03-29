@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Medications;
 
 namespace Clinic.Treatments
 {
@@ -93,7 +94,18 @@ namespace Clinic.Treatments
             return 0;
         }
 
-        public List<Medication> GiveMedication(uint medicationId, uint units)
+        public List<Medication> GiveMedications(Prescription prescription)
+        {
+            var medications = new List<Medication>();
+            foreach (var medication in prescription.MedicationsAmount)
+            {
+                medications.AddRange(GiveMedication(medication.Key.Id,medication.Value));
+            }
+
+            return medications;
+        }
+
+        private List<Medication> GiveMedication(uint medicationId, uint units)
         {
             if (MedicationsInStock.ContainsKey(medicationId))
             {
