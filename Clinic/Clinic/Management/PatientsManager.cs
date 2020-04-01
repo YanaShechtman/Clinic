@@ -5,29 +5,23 @@ namespace Clinic.Management
 {
     public class PatientsManager : IPatientsManager
     {
-        public Dictionary<uint, Patient> Patients { get; set; }
+        private Dictionary<uint, Patient> _patients { get; set; }
 
         public void AddPatient(Patient patient)
         {
-            Patients.Add(patient.Id,patient);
+            _patients.Add(patient.Id, patient);
         }
 
         public bool RemovePatient(uint patientId)
         {
-            if (Patients.ContainsKey(patientId))
-            {
-                Patients.Remove(patientId);
-                return true;
-            }
-
-            return false;
+            return _patients.Remove(patientId);
         }
 
         public bool EditPatient(uint patientId, Patient patient)
         {
-            if (Patients.ContainsKey(patientId))
+            if (_patients.ContainsKey(patientId))
             {
-                Patients[patientId] = patient;
+                _patients[patientId] = patient;
                 return true;
             }
 

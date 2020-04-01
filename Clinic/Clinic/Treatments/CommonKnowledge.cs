@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Medications;
 
-namespace Medications
+namespace Clinic.Treatments
 {
-    public static class CommonKnowledge
+    public class CommonKnowledge
     {
         public static Dictionary<uint, List<IMedication>> IllnessToTreatment { set; get; }
 
@@ -17,10 +14,8 @@ namespace Medications
             {
                 return treatmentsByIllnessId;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         public static bool AddTreatmentToIllness(uint illnessId, List<IMedication> treatments)
@@ -32,10 +27,8 @@ namespace Medications
                 IllnessToTreatment[illnessId] = treatmentsByIllnessId;
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
         public static bool AddIllness(uint illnessId)
         {

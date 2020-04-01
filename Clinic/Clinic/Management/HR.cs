@@ -8,68 +8,72 @@ namespace Clinic.Management
 {
     public class HR : IHR
     {
-        public Dictionary<uint, Doctor> Doctors { get; set; }
+        private Dictionary<uint, Doctor> _doctors;
         public event EventHandler<DoctorEventArgs> OnDoctorChanged;
+
+        public HR(Dictionary<uint, Doctor> doctors)
+        {
+            _doctors = doctors;
+        }
 
         public void AddDoctor(Doctor doctor)
         {
-            Doctors.Add(doctor.Id, doctor);
-            DoctorEventArgs doctorEventArgs = new DoctorEventArgs()
+            _doctors.Add(doctor.Id, doctor);
+            var doctorEventArgs = new DoctorEventArgs()
             {
                 Doctor = doctor,
                 DoctorEventType = DoctorEventType.Add
             };
-            OnDoctorChanged.Invoke(this,doctorEventArgs);
+            if (OnDoctorChanged != null) OnDoctorChanged.Invoke(this, doctorEventArgs);
         }
 
-        public bool EditDoctor(uint doctorID,Doctor doctor)
+        public bool EditDoctor(uint doctorID, Doctor doctor)
         {
-            if(Doctors.ContainsKey(doctorID))
+            if (_doctors.ContainsKey(doctorID))
             {
-                Doctors[doctorID] = doctor;
+                _doctors[doctorID] = doctor;
                 var doctorEventArgs = new DoctorEventArgs()
                 {
                     Doctor = doctor,
                     DoctorEventType = DoctorEventType.Edit
                 };
+
                 OnDoctorChanged?.Invoke(this, doctorEventArgs);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
-        public Doctor GetDoctorById(uint doctorID)
+        public Doctor GetDoctorById(uint doctorId)
         {
             Doctor doctor;
-            if(Doctors.TryGetValue(doctorID, out doctor))
+            if (_doctors.TryGetValue(doctorId, out doctor))
             {
                 return doctor;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public Doctor GetDoctorByName(string doctorName)
         {
-            return Doctors.Values.FirstOrDefault(doctor => doctor.Name == doctorName);
+            foreach (var doctor in _doctors.Values)
+            {
+                if (doctor.Name == doctorName) return doctor;
+            }
+            return null;
         }
 
         public List<Doctor> GetDoctorsBySpec(Speciality specialty)
         {
-            return Doctors.Values.Where(doctor => doctor.Specialities.Contains(specialty)).ToList();
+            return _doctors.Values.Where(doctor => doctor.Specialities.Contains(specialty)).ToList();
         }
 
-        public bool RemoveDoctor(uint doctorID)
+        public bool RemoveDoctor(uint doctorId)
         {
             Doctor doctor;
-            if (Doctors.TryGetValue(doctorID,out doctor))
+            if (_doctors.TryGetValue(doctorId, out doctor))
             {
-                Doctors.Remove(doctorID);
+                _doctors.Remove(doctorId);
                 var doctorEventArgs = new DoctorEventArgs()
                 {
                     Doctor = doctor,

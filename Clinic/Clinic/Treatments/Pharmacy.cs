@@ -99,7 +99,7 @@ namespace Clinic.Treatments
             var medications = new List<Medication>();
             foreach (var medication in prescription.MedicationsAmount)
             {
-                medications.AddRange(GiveMedication(medication.Key.Id,medication.Value));
+                medications.AddRange(GiveMedication(medication.Key.Id, medication.Value));
             }
 
             return medications;

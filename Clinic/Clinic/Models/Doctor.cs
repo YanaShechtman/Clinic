@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Clinic.Models.Enums;
+using Clinic.Treatments;
 using Medications;
 
 namespace Clinic.Models
@@ -9,9 +10,9 @@ namespace Clinic.Models
     public class Doctor : Person
     {
         public List<Speciality> Specialities { get; set; }
-
+        public CommonKnowledge CommonKnowledge { get; set; }
         public Doctor(uint id, string name, Sex sex, uint age, DateTime birthDate, List<Speciality> specialities)
-        : base(id, name, sex, age, birthDate)
+            : base(id, name, sex, age, birthDate)
         {
         }
 
@@ -26,7 +27,7 @@ namespace Clinic.Models
             var medicationsToGive = treatments.Where(treatment => treatment.IsRelevant(patient)).ToList();
             var medications = medicationsToGive.ToDictionary<IMedication, IMedication, uint>
                 (medication => medication, medication => 1);
-            return new Prescription(patient.Id,Id,medications);
+            return new Prescription(patient.Id, Id, medications);
         }
     }
 }

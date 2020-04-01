@@ -35,6 +35,7 @@ namespace Medications
             if (patient.Allergies.Intersect(NotForAllergies).Any() ||
                 patient.Illnesses.Intersect(NotBackgroundDiseases).Any())
                 return false;
+
             return true;
         }
     }

@@ -7,8 +7,8 @@ using Medications;
 
 namespace Clinic.Management
 {
-   public class Management
-   {
+    public class Management : IDisposable
+    {
         private readonly IHR _hr;
         private readonly IScheduler _scheduler;
         private readonly IPatientsManager _patientsManager;
@@ -25,7 +25,7 @@ namespace Clinic.Management
 
         private void OnDoctorChanged(object sender, DoctorEventArgs e)
         {
-            switch(e.DoctorEventType)
+            switch (e.DoctorEventType)
             {
                 case DoctorEventType.Add:
                     _scheduler.OnDoctorAdded(e.Doctor);
@@ -51,9 +51,9 @@ namespace Clinic.Management
             return _hr.GetDoctorsBySpec(doctorSpeciality);
         }
 
-        public Visit ScheduleVisit(uint doctorId, Patient patient,IList<Illness> illnesses)
+        public Visit ScheduleVisit(uint doctorId, Patient patient, IList<Illness> illnesses)
         {
-            return _scheduler.CreateVisit(doctorId,patient,illnesses);
+            return _scheduler.CreateVisit(doctorId, patient, illnesses);
         }
 
         public void CancelVisit(uint visitId)
@@ -66,5 +66,9 @@ namespace Clinic.Management
             return _pharmacy.GiveMedications(prescription);
         }
 
-   }
+        public void Dispose()
+        {
+            _hr.OnDoctorChanged -= OnDoctorChanged;
+        }
+    }
 }

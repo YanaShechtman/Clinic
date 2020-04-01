@@ -7,9 +7,9 @@ using Clinic.Models;
 
 namespace Medications
 {
-   public interface IMedication
+    public interface IMedication
     {
-        uint Id { get; set; }
+        uint Id { get; }
         string Name { get; set; }
         TreatmentFrequency Frequency { get; set; }
         string Comment { get; set; }

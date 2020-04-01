@@ -8,13 +8,14 @@ namespace Clinic.Scheduling
 {
     public class Scheduler : IScheduler
     {
-        public Scheduler()
-        {
-           _visitDuration = int.Parse(ConfigurationManager.AppSettings["VisitDurationInMin"]);
-        }
         public Dictionary<uint, List<Visit>> Visits { get; set; }
         public List<Doctor> Doctors { get; set; }
         private readonly int _visitDuration;
+
+        public Scheduler()
+        {
+            _visitDuration = int.Parse(ConfigurationManager.AppSettings["VisitDurationInMin"]);
+        }
 
         public void CancelVisit(uint visitId)
         {
@@ -33,11 +34,12 @@ namespace Clinic.Scheduling
                 }
 
                 var doctor = Doctors.FirstOrDefault(doctor1 => doctor1.Id == doctorId);
-                var newVisit = new Visit(patient, doctor, maxVisit.EndTime, maxVisit.EndTime.AddMinutes(_visitDuration),illnesses);
+                var newVisit = new Visit(patient, doctor, maxVisit.EndTime, maxVisit.EndTime.AddMinutes(_visitDuration), illnesses);
                 visits.Add(newVisit);
                 return newVisit;
             }
-            else return null;
+
+            return null;
         }
         public void OnDoctorAdded(Doctor doctor)
         {
@@ -47,20 +49,19 @@ namespace Clinic.Scheduling
         public void OnDoctorRemoved(Doctor doctor)
         {
             Visits.Remove(doctor.Id);
-            var index = FindDoctorById(doctor.Id);
+            var index = FindDoctorIndexById(doctor.Id);
             Doctors.RemoveAt(index);
         }
 
         public void OnDoctorEdited(Doctor doctor)
         {
-            var index = FindDoctorById(doctor.Id);
+            var index = FindDoctorIndexById(doctor.Id);
             Doctors[index] = doctor;
         }
 
-        private int FindDoctorById(uint doctorId)
+        private int FindDoctorIndexById(uint doctorId)
         {
             return Doctors.FindIndex(doctor => doctor.Id == doctorId);
         }
     }
 }
-
