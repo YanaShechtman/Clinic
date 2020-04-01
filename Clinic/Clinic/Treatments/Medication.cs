@@ -5,7 +5,7 @@ using Clinic.Management;
 using Clinic.Models;
 using Clinic.Models.Enums;
 
-namespace Medications
+namespace Clinic.Treatments
 {
     public class Medication : IMedication
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Medications
+namespace Clinic.Treatments
 {
     public interface IPharmacy
     {

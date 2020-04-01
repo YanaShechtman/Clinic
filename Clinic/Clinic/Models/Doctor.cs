@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Clinic.Models.Enums;
 using Clinic.Treatments;
-using Medications;
 
 namespace Clinic.Models
 {

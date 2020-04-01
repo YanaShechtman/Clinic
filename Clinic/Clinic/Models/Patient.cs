@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Clinic.Management;
 using Clinic.Models.Enums;
-using Medications;
+using Clinic.Treatments;
 
 namespace Clinic.Models
 {
@@ -54,8 +54,7 @@ namespace Clinic.Models
         public void CancelVisit(uint visitId)
         {
             ClinicManagement.CancelVisit(visitId);
-            var index = Visits.FindIndex(visit => visit.Id == visitId);
-            Visits.RemoveAt(index);
+            Visits.RemoveAll((visit => visit.Id == visitId));
         }
 
         public List<Medication> TakePrescription(Prescription prescription)

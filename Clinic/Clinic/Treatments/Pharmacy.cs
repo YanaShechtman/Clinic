@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Medications;
 
 namespace Clinic.Treatments
 {
@@ -44,14 +43,7 @@ namespace Clinic.Treatments
             if (MedicationsInStock.ContainsKey(medicationId))
             {
                 MedicationsInStock.Remove(medicationId);
-                foreach (var medication in Medications)
-                {
-                    if (medication.Id == medicationId)
-                    {
-                        Medications.Remove(medication);
-                    }
-                }
-
+                Medications.ToList().RemoveAll(medication => medication.Id == medicationId);
                 return true;
             }
 
@@ -86,9 +78,10 @@ namespace Clinic.Treatments
 
         public uint CheckUnitsInStock(uint medicationId)
         {
-            if (MedicationsInStock.ContainsKey(medicationId))
+            uint units;
+            if (MedicationsInStock.TryGetValue(medicationId, out units))
             {
-                return MedicationsInStock[medicationId];
+                return units;
             }
 
             return 0;

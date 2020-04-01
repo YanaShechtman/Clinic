@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Clinic.Models;
+﻿using Clinic.Models;
 
-namespace Medications
+namespace Clinic.Treatments
 {
     public interface IMedication
     {
@@ -14,6 +9,5 @@ namespace Medications
         TreatmentFrequency Frequency { get; set; }
         string Comment { get; set; }
         bool IsRelevant(Patient patient);
-
     }
 }
