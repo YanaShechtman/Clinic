@@ -1,4 +1,6 @@
-﻿namespace Clinic.Management
+﻿using
+
+namespace Clinic.Management
 {
     public static class GenerateIds
     {
