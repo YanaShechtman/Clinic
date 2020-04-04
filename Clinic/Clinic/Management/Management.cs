@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Clinic.Models;
 using Clinic.Models.Enums;
 using Clinic.Scheduling;
-using Medications;
+using Clinic.Treatments;
+using log4net;
 
 namespace Clinic.Management
 {
@@ -13,6 +15,7 @@ namespace Clinic.Management
         private readonly IScheduler _scheduler;
         private readonly IPatientsManager _patientsManager;
         private readonly IPharmacy _pharmacy;
+        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public Management(IHR hr, IScheduler scheduler, IPatientsManager patientsManager, IPharmacy pharmacy)
         {
@@ -63,6 +66,7 @@ namespace Clinic.Management
 
         public List<Medication> GivePatientPrescription(Prescription prescription)
         {
+            _log.Info($"Patient_id: {prescription.PatientId} took prescription_id: {prescription.Id}");
             return _pharmacy.GiveMedications(prescription);
         }
 

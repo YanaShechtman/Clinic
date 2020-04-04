@@ -44,11 +44,11 @@ namespace Clinic.Models
         {
             var medications = prescription.MedicationsAmount.ToDictionary(pair => pair.Key.Name, pair => pair.Value);
             _log.Info(
-                $"In visit_Id: {Id} The doctor {Doctor.Name} ID: {Doctor.Id} treated Patient: {Patient.Name} ID: {Patient.Id}");
+                $"In visit_id: {Id} The doctor_name: {Doctor.Name} doctor_id: {Doctor.Id} treated patient_name: {Patient.Name} patient_id: {Patient.Id} and gave prescription_id: {prescription.Id}");
             foreach (var medication in medications.Keys)
             {
                 _log.Info(
-                    $"visit_Id: {Id}, treatment given medication_name: {medication} medication_amount: {medications[medication]} ");
+                    $"visit_id: {Id} prescription_id: {prescription.Id} given medication_name: {medication} medication_amount: {medications[medication]}");
             }
         }
     }

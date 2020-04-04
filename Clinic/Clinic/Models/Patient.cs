@@ -4,6 +4,7 @@ using System.Linq;
 using Clinic.Management;
 using Clinic.Models.Enums;
 using Clinic.Treatments;
+using log4net;
 
 namespace Clinic.Models
 {

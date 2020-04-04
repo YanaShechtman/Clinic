@@ -12,7 +12,6 @@ namespace Clinic.Models
     {
         public List<Speciality> Specialities { get; set; }
         public CommonKnowledge CommonKnowledge { get; set; }
-        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public Doctor(uint id, string name, Sex sex, uint age, DateTime birthDate, List<Speciality> specialities)
             : base(id, name, sex, age, birthDate)
